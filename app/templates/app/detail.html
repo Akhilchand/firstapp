@@ -1,0 +1,22 @@
+
+{% extends 'app/base.html' %}
+
+{% block main_content %}
+
+<h1> {{question.question_text}}</h1>
+
+{% if error_message %} <p><strong>{{error_message}}</strong></p> {% endif %}
+
+<form action = "{% url 'app:vote' question.id %}" method = "POST">
+	{% csrf_token %}
+	{% for choice in question.choice_set.all %}
+		<input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}"/>
+		<label for="choice{{forloop.counter}}"> {{choice.choice_text}} </label><br>
+	{% endfor %}
+	<br>
+	<input type="submit" class = "btn btn-success" value="vote" style="font-size:7pt;color:white; background-color:green;border:2px solid #336600";>
+</form>
+<br>
+<a href = "{% url 'app:index' %}"> Back to question list </a>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+
+{% extends 'app/base.html' %}
+
+{% block main_content %}
+
+<h1> Hello Akhil Chand! Choose a question </h1>
+
+{% if latest_questions %}
+	<ul>
+		{% for question in latest_questions %}
+			<!--<li><a href='/app/{{question.id}}'><b>{{question.question_text}}</b></a></li>-->
+			<li><a href= "{% url 'app:detail' question.id %}"><b>{{question.question_text}}</b></a></li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p> You don't have any questions. Please add some. </p>
+{% endif %}
+		
+
+{% endblock %}
